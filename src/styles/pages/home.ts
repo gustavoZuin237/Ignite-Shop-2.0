@@ -11,17 +11,21 @@ export const HomeContainer = styled('main', {
 export const Product = styled('div', {
     background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
     borderRadius: 8,
-    cursor: 'pointer',
     position: 'relative',
     overflow: 'hidden',
-    minWidth: 540,
+    cursor: 'grab',
 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
 
     img: {
+        maxWidth: '100%',
         objectFit: 'cover'
+    },
+
+    '&:active': {
+        cursor: 'grabbing',
     },
 
     footer: {
@@ -29,7 +33,7 @@ export const Product = styled('div', {
         bottom: '0.25rem',
         left: '0.25rem',
         right: '0.25rem',
-        padding: '2rem',
+        padding: '1.5rem',
 
         borderRadius: 6,
 
@@ -43,6 +47,12 @@ export const Product = styled('div', {
         opacity: 0,
         transition: 'all 0.2s ease-in-out',
 
+        div: {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem'
+        },
+
         strong: {
             fontSize: '$lg',
             color: '$gray100',
@@ -52,6 +62,28 @@ export const Product = styled('div', {
             fontSize: '$xl',
             fontWeight: 'bold',
             color: '$green300',
+        },
+
+        button: {
+            width: '3.5rem',
+            height: '3.5rem',
+
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+
+            border: 0,
+            color: '$white',
+            fontWeight: 'bold',
+            backgroundColor: '$green300',
+            borderRadius: '6px',
+            transition: '0.2s',
+
+            cursor: 'pointer',
+
+            '&:hover': {
+                backgroundColor: '$green500',
+            }
         }
     },
 

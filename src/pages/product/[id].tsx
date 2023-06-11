@@ -25,7 +25,7 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
-    async function handleBuyProduct() {
+    async function handleAddToCart() {
         try {
             setIsCreatingCheckoutSession(true)
 
@@ -39,14 +39,14 @@ export default function Product({ product }: ProductProps) {
 
         } catch (err) {
             setIsCreatingCheckoutSession(false)
-            alert('Falha ao redirecionar ao Checkout!');
+            alert('Falha ao adicionar a sacola!');
         }
     }
 
     return (
         <>
             <Head>
-                <title>{product.name} | Ignite Shop</title>
+                <title>{product.name} | Ignite Shop 2.0</title>
             </Head>
 
             <ProductContainer>
@@ -60,7 +60,7 @@ export default function Product({ product }: ProductProps) {
 
                     <p>{product.description}</p>
 
-                    <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</button>
+                    <button disabled={isCreatingCheckoutSession} onClick={handleAddToCart}>Colocar na sacola</button>
                 </ProductDetails>
             </ProductContainer>
         </>

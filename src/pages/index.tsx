@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 import { HomeContainer, Product } from "../styles/pages/home";
+import { Handbag } from 'phosphor-react'
 
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
@@ -25,7 +26,7 @@ interface HomeProps {
 export default function Home({ products }: HomeProps) {
   const [ sliderRef ] = useKeenSlider({
     slides: {
-      perView: 3,
+      perView: 1.8,
       spacing: 48,
     }
   })
@@ -33,22 +34,28 @@ export default function Home({ products }: HomeProps) {
   return (
     <>
       <Head>
-        <title>Home | Ignite Shop</title>
+        <title>Home | Ignite Shop 2.0</title>
       </Head>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
         {
           products.map(product => {
-            return <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
-                    <Product className="keen-slider__slide">
+            return <Product key={product.id} className="keen-slider__slide">
                       <Image src={product.imageUrl} width={520} height={480} alt=""/>
 
                       <footer>
-                        <strong>{product.name}</strong>
-                        <span>{product.price}</span>
+                        <div>
+                          <strong>{product.name}</strong>
+                          <span>{product.price}</span>
+                        </div>
+
+                        <Link href={`/product/${product.id}`} prefetch={false}>
+                          <button>
+                            <Handbag size={32}/>
+                          </button>
+                        </Link>
                       </footer>
                     </Product>
-                  </Link>
           })
         }
       </HomeContainer>
