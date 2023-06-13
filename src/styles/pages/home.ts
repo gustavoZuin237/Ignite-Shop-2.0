@@ -75,14 +75,14 @@ export const Product = styled('div', {
             border: 0,
             color: '$white',
             fontWeight: 'bold',
-            backgroundColor: '$green300',
+            backgroundColor: '$green500',
             borderRadius: '6px',
             transition: '0.2s',
 
             cursor: 'pointer',
 
             '&:hover': {
-                backgroundColor: '$green500',
+                backgroundColor: '$green300',
             }
         }
     },
