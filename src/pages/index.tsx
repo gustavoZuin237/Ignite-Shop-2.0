@@ -12,6 +12,8 @@ import { GetStaticProps } from "next";
 
 import { stripe } from "../lib/stripe";
 import Stripe from "stripe";
+import { useContext } from "react";
+import { CheckoutContext } from "../contexts/checkoutContext";
 
 interface HomeProps {
   products: {
@@ -30,6 +32,12 @@ export default function Home({ products }: HomeProps) {
       spacing: 48,
     }
   })
+
+  const { setCheckoutProductsList } = useContext(CheckoutContext)
+
+  function updateProductsList() {
+    setCheckoutProductsList(products)
+  }
 
   return (
     <>
@@ -50,7 +58,7 @@ export default function Home({ products }: HomeProps) {
                         </div>
 
                         <Link href={`/product/${product.id}`} prefetch={false}>
-                          <button>
+                          <button onClick={updateProductsList}>
                             <Handbag size={32}/>
                           </button>
                         </Link>

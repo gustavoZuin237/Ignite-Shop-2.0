@@ -41,7 +41,9 @@ export const Title = styled(Dialog.Title, {
 export const CheckoutItemList = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1.25rem'
+    gap: '1.25rem',
+    paddingBottom: '2rem',
+    overflowY: 'scroll'
 })
 
 export const CheckoutItem = styled('div', {
@@ -92,7 +94,7 @@ export const RemoveButton = styled('button', {
 })
 
 export const ConfirmPurchaseContainer = styled('div', {
-    marginTop: 'auto',
+    marginTop: '2rem',
     display: 'flex',
     flexDirection: 'column',
 })

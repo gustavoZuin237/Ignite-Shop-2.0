@@ -10,25 +10,29 @@ import Image from "next/image";
 import * as Dialog from '@radix-ui/react-dialog'
 import CheckoutModal from "../components/checkoutModal";
 
+import { CheckoutContextProvider } from "../contexts/checkoutContext";
+
 globalStyles();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Container>
-      <Header>
-        <Image src={LogoImg.src} width={130} height={52} alt="" />
+      <CheckoutContextProvider>
+        <Header>
+          <Image src={LogoImg.src} width={130} height={52} alt="" />
 
-        <Dialog.Root>
-          <Dialog.Trigger asChild>
-            <button>
-              <Handbag size={24}/>
-            </button>
-          </Dialog.Trigger>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <button>
+                <Handbag size={24}/>
+              </button>
+            </Dialog.Trigger>
 
-          <CheckoutModal />
-        </Dialog.Root>
-      </Header>
-      <Component {...pageProps} />
+            <CheckoutModal />
+          </Dialog.Root>
+        </Header>
+        <Component {...pageProps} />
+      </CheckoutContextProvider>
     </Container>
   )
 }
