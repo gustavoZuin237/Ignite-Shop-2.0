@@ -17,13 +17,15 @@ import { useContext } from "react";
 import { CheckoutContext } from "../../contexts/checkoutContext";
 
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface ProductProps {
   product: {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    price: number;
+    formattedPrice: string;
     description: string;
     defaultPriceId: string;
   };
@@ -33,15 +35,17 @@ export default function Product({ product }: ProductProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false);
 
+  const router = useRouter();
+
   const { checkoutProducts, setCheckoutProducts } = useContext(CheckoutContext);
 
   async function handleAddToCart() {
     try {
       setIsCreatingCheckoutSession(true);
 
-      setCheckoutProducts([...checkoutProducts, product]);
+      setCheckoutProducts([product, ...checkoutProducts]);
 
-      window.location.href = "/";
+      router.push("/");
     } catch (err) {
       setIsCreatingCheckoutSession(false);
       alert("Falha ao adicionar a sacola!");
@@ -61,7 +65,7 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{product.formattedPrice}</span>
 
           <p>{product.description}</p>
 
@@ -102,7 +106,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         name: product.name,
         imageUrl: product.images[0],
         url: product.url,
-        price: new Intl.NumberFormat("pt-Br", {
+        price: price.unit_amount / 100,
+        formattedPrice: new Intl.NumberFormat("pt-Br", {
           style: "currency",
           currency: "BRL",
         }).format(price.unit_amount / 100),

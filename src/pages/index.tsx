@@ -22,7 +22,8 @@ interface HomeProps {
     name: string;
     imageUrl: string;
     url: string;
-    price: string;
+    price: number;
+    formattedPrice: string;
   }[];
 }
 
@@ -33,10 +34,6 @@ export default function Home({ products }: HomeProps) {
       spacing: 48,
     },
   });
-
-  const { setProductsList } = useContext(CheckoutContext);
-
-  setProductsList(products);
 
   return (
     <>
@@ -53,7 +50,7 @@ export default function Home({ products }: HomeProps) {
               <footer>
                 <div>
                   <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <span>{product.formattedPrice}</span>
                 </div>
 
                 <Link href={`/product/${product.id}`} prefetch={false}>
@@ -83,7 +80,8 @@ export const getStaticProps: GetStaticProps = async () => {
       name: product.name,
       imageUrl: product.images[0],
       url: product.url,
-      price: new Intl.NumberFormat("pt-Br", {
+      price: price.unit_amount / 100,
+      formattedPrice: new Intl.NumberFormat("pt-Br", {
         style: "currency",
         currency: "BRL",
       }).format(price.unit_amount / 100),

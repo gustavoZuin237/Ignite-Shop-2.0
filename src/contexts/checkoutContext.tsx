@@ -5,31 +5,27 @@ interface ContextProviderProps {
 }
 
 interface CheckoutContextI {
-  productsList: Product[];
-  setProductsList: ([]) => void;
   checkoutProducts: Product[];
   setCheckoutProducts: ([]) => void;
 }
 
-type Product = {
+export type Product = {
   id: string;
   name: string;
   imageUrl: string;
   url: string;
-  price: string;
+  price: number;
+  formattedPrice: string;
 };
 
 export const CheckoutContext = createContext({} as CheckoutContextI);
 
 export function CheckoutContextProvider({ children }: ContextProviderProps) {
-  const [productsList, setProductsList] = useState<Product[]>([]);
   const [checkoutProducts, setCheckoutProducts] = useState<Product[]>([]);
 
   return (
     <CheckoutContext.Provider
       value={{
-        productsList,
-        setProductsList,
         checkoutProducts,
         setCheckoutProducts,
       }}
